@@ -59,7 +59,7 @@ const Listitem = ({ listing }) => {
         <div className='p-3 flex flex-col gap-3'>
           <p className='text-lg font-semibold text-slate-700 truncate'>{listing.name}</p>
           <div className='flex items-center gap-2'>
-            <MdLocationOn className='text-red-500 h-4 w-4' />
+            <MdLocationOn style={{width: '22px', height: '22px'}} className='text-red-500 h-4 w-4 font-bold' />
             <p className='text-sm text-gray'>{listing.address}</p>
           </div>
           <div>
@@ -72,10 +72,10 @@ const Listitem = ({ listing }) => {
                 {listing.type === 'rent' && ' / month'}
             </p>
             <div className='text-slate-700 flex gap-4'>
-              <div className='font-bold text-xs'>
+              <div className='font-bold text-sm'>
                 {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : `${listing.bathrooms} Bath`}
               </div>
-              <div className='font-bold text-xs'>
+              <div className='font-bold text-sm '>
                 {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : `${listing.bedrooms} Bed`}
               </div>
             </div>

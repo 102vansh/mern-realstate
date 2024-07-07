@@ -78,11 +78,11 @@ const offerfunc = async () => {
 {
     offerlisting && (
         <div className=''>
-<div className='my-3 '>
+<div className='my-3 ml-5  text-xl'>
 <h2 className='text-2xl font-semibold text-slate-600'>Recents Offer</h2>
 <Link className='text-sm text-blue-800 hover:underline' to={'/search?offer=true'}>Show More Offers</Link>
 </div>
-<div className='flex flex-wrap gap-4'>
+<div className='flex flex-wrap gap-6 ml-5'>
 {
     offerlisting && offerlisting.map((item)=>(
         <Listitem listing = {item} key={item._id} />

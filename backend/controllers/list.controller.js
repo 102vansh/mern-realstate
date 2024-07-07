@@ -85,50 +85,47 @@ if(listing.userRef == req.user.id){
             }
             
             }
-            exports.getalllisting = async (req, res, next) => {
-                try{
-                    const limit = parseInt(req.query.limit) || 10
-                const skip = parseInt(req.query.skip) || 0
-                let offer = req.query.offer
-                if(offer ===undefined || offer === 'false'){
-                    offer = {$in: [false, true]}
-                }
-                let furnished = req.query.furnished
-                if(furnished ===undefined || furnished === 'false'){
-                    furnished = {$in: [false, true]}
-                }
-let parking = req.query.parking
-if(parking === undefined || parking === 'false'){
-    parking = {$in: [false, true]}
-}
-let type = req.query.type
-if(type === undefined || type === 'rent'){
-    type = {$in: ['rent', 'sale']}
-}
-     const searchterm = req.query.searchterm || '' 
-     const sort = req.query.sort || '-createdAt'
-     const order = req.query.order || 'asc'
-       
-                const listings = await List.find({
-                    name: {$regex: searchterm, $options: 'i'},
-offer,
-furnished,
-parking,
-type,
-
-                }).sort({[sort]: order}).limit(limit).skip(skip)
-                const total = await List.countDocuments({
-
-
-                })
-                res.status(200).json({
-                    success: true,
-                    listings,
-                    total
-                })
-                }catch(error){
-                return next(error)
-                }
-                
-                }
-                
+            
+exports.getalllisting = async (req, res, next) => {
+    try {
+      const limit = parseInt(req.query.limit) || 10;
+      const skip = parseInt(req.query.skip) || 0;
+  
+      let offer = req.query.offer === 'true' ? true : req.query.offer === 'false' ? false : { $in: [false, true] };
+      let furnished = req.query.furnished === 'true' ? true : req.query.furnished === 'false' ? false : { $in: [false, true] };
+      let parking = req.query.parking === 'true' ? true : req.query.parking === 'false' ? false : { $in: [false, true] };
+      let type = req.query.type && req.query.type !== 'all' ? req.query.type : { $in: ['rent', 'sale'] };
+  
+      const searchterm = req.query.search || '';
+      const sort = req.query.sort || 'createdAt';
+      const order = req.query.order === 'asc' ? 1 : -1;
+  
+      const listings = await List.find({
+        name: { $regex: searchterm, $options: 'i' },
+        offer,
+        furnished,
+        parking,
+        type
+      })
+        .sort({ [sort]: order })
+        .limit(limit)
+        .skip(skip);
+  
+      const total = await List.countDocuments({
+        name: { $regex: searchterm, $options: 'i' },
+        offer,
+        furnished,
+        parking,
+        type
+      });
+  
+      res.status(200).json({
+        success: true,
+        listings,
+        total
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+  

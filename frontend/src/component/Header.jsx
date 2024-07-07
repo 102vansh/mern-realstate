@@ -85,6 +85,7 @@ useEffect(() => {
             className="bg-transparent border-none outline-none focus:outline-none w-24 sm:w-64"
             value={search}
             onChange={(e)=>setsearch(e.target.value)}
+            // onClick={navigate(`/search?search=${search}`)}
           />
           <button> 
            <FaSearch type='submit' className="text-slate-600" />
@@ -100,7 +101,7 @@ useEffect(() => {
           </Link>
           {user ? (
             <Link to="/profile">
-              <img className="w-8 rounded-full" src={user.avatar} alt="profile" />
+              <img className="w-6 rounded-full" src={user.avatar} alt="profile" />
               
             </Link>
           ) : (

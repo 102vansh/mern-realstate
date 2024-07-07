@@ -175,7 +175,7 @@ const {user} = useSelector((state)=>state.user.user)
           </p>
         </div>
         <p className='text-slate-800 ml-7 font-semibold mt-4 flex items-center gap-2'>
-        <FaMapMarkerAlt className='text-green-800'/>
+        <FaMapMarkerAlt style={{fontSize:'20px'}} className='text-green-800 '/>
         {listing.address}
         
         </p>
