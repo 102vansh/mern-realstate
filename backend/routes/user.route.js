@@ -1,0 +1,15 @@
+const express = require('express')
+const { createUser, login, authgoogle, deleteuser, logout, mylisting, updareuser, getuser } = require('../controllers/user.controller')
+const { isAuthenticated } = require('../middleware/auth')
+const { getlisting } = require('../controllers/list.controller')
+const router = express.Router()
+
+router.route('/register').post(createUser)
+router.route('/login').post(login)
+router.route('/auth/google').post(authgoogle)
+router.route('/delete/:id').delete(isAuthenticated,deleteuser)
+router.route('/logout').get(isAuthenticated,logout)
+// router.route('/mylisting').get(isAuthenticated,mylisting)
+router.route('/update/:id').post(isAuthenticated,updareuser)
+router.route('/get/:id').get(isAuthenticated,getuser)
+module.exports = router
