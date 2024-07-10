@@ -88,7 +88,7 @@ if(listing.userRef == req.user.id){
             
 exports.getalllisting = async (req, res, next) => {
     try {
-      const limit = parseInt(req.query.limit) || 10;
+      const limit = parseInt(req.query.limit) || 15;
       const skip = parseInt(req.query.skip) || 0;
   
       let offer = req.query.offer === 'true' ? true : req.query.offer === 'false' ? false : { $in: [false, true] };

@@ -311,7 +311,7 @@ const Profile = () => {
       ))} */}
 
 
-
+{listing ==0 && <h1 className='text-center mt-7 text-2xl font-semibold'>No Listing...</h1>}
       {listing &&listing.length > 0 && (
         <div className='flex flex-col gap-4'>
           <h1 className='text-center mt-7 text-2xl font-semibold'>

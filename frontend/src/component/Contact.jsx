@@ -39,7 +39,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { FaPhoneVolume } from 'react-icons/fa';
 const Contact = ({ listing }) => {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState('');
@@ -80,6 +80,10 @@ const Contact = ({ listing }) => {
       >
         Send Message
       </Link>
+      <div className='flex items-center gap-4 mb-5'>
+        <h3>Phone number of<span className='font-bold ml-2'>{landlord?.username}</span>  :-  </h3>
+        <p className='font-semibold flex gap-1'><span><FaPhoneVolume className='text-green-500 text-xl font-semibold' /></span>8319874806</p>
+      </div>
         </div>
       }
       
