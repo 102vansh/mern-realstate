@@ -79,18 +79,19 @@ useEffect(() => {
           </h1>
         </Link>
         <form onSubmit={handelsubmit} className="bg-slate-100 p-3 rounded-lg flex items-center">
+        <Link to={`/search?${search}`}>
           <input
             type="text"
             placeholder="Search..."
             className="bg-transparent border-none outline-none focus:outline-none w-24 sm:w-64"
             value={search}
             onChange={(e)=>setsearch(e.target.value)}
-            // onClick={navigate(`/search?search=${search}`)}
+            
           />
           <button> 
            <FaSearch type='submit' className="text-slate-600" />
           </button>
-        
+        </Link>
         </form>
         <ul className="flex gap-4">
           <Link to="/">

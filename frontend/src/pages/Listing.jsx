@@ -198,10 +198,12 @@ const {user} = useSelector((state)=>state.user.user)
 {listing.furnished ? 'Furnished' : 'Not furnished'}
           </li>
         </ul>
-        {user && user._id === listing.userRef && !contact && (
+        
             <button onClick={() => setcontact(true)} className='bg-slate-700 text-white uppercase hover:opacity-100 p-3 rounded-lg ml-12 mb-4'>Contact Landlord</button>
-        )}
+        
+        {/* <button onClick={() => setcontact(true)} className='bg-slate-700 text-white uppercase hover:opacity-100 p-3 rounded-lg ml-12 mb-4'>Contact Landlord</button> */}
       {contact && <Contact listing={listing}/>}
+   
       </div>
     </div>
   );
