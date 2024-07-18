@@ -24,7 +24,7 @@ const Signin = () => {
     const response = await axios.post(' http://localhost:5001/api/v1/user/login',formdata,{withCredentials:true})
        
     console.log(response.data)
-    dispatch(loginSuccess(response.data.user))
+    dispatch(loginSuccess(response.data))
     toast.success(response.data.message)
     setloading(false)
     navigate('/')

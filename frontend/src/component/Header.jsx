@@ -52,7 +52,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user?.user || {});
 const[search,setsearch] = useState("")
 const navigate = useNavigate()
 const handelsubmit = (e) => {
