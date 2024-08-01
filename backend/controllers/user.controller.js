@@ -32,7 +32,7 @@ exports.login = async (req, res,next) => {
         }
         let user = await User.findOne({email}).select('+password')
         if(!user){
-            return next(new ErrorHandler('Invalid Email or Password', 401))
+            return next(new ErrorHandler('Register First', 401))
         }
         const isPasswordMatched = await user.comparePassword(password)
         if(!isPasswordMatched){

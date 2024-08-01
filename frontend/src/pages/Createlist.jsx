@@ -206,6 +206,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Createlist = () => {
   const [files, setFiles] = useState([]);
   const { user } = useSelector((state) => state.user.user);
+  const[loading,setloading] = useState(false)
   const [formData, setFormData] = useState({
     imageUrls: [],
     description: '',
@@ -226,19 +227,24 @@ const Createlist = () => {
   const [imageError, setImageError] = useState('');
 
   const handleImageSubmit = async (e) => {
+
     e.preventDefault();
     if (files.length > 0 && files.length < 6) {
       const promises = files.map(file => storeImage(file));
       try {
+        setloading(true)
         const urls = await Promise.all(promises);
         console.log('Image URLs:', urls);
         setFormData(prevFormData => ({
           ...prevFormData,
           imageUrls: [...prevFormData.imageUrls, ...urls]
         }));
+
+        setloading(false)
         setImageError('');
       } catch (error) {
         setImageError('Image upload failed');
+        setloading(false)
       }
     } else {
       setImageError('Please select between 1 and 5 images.');
@@ -254,6 +260,7 @@ const Createlist = () => {
   };
 
   const handleSubmit = async (e) => {
+    setloading(true)
     e.preventDefault();
     console.log('Submitting form data:', formData);
     try {
@@ -277,9 +284,12 @@ const Createlist = () => {
         type: 'rent',
         userRef: user._id
       });
+      setloading(false)
       setFiles([]);
     } catch (err) {
       console.log(err);
+      toast.error('Failed to create listing');
+      setloading(false)
     }
   };
 
@@ -377,11 +387,13 @@ const Createlist = () => {
               id='images'
               multiple
             />
+
             <button
               onClick={handleImageSubmit}
+
               className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
             >
-              Upload
+            {loading ? 'Uploading...' : 'Upload'}
             </button>
           </div>
           <p className='text-red-500'>{imageError}</p>
